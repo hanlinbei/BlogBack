@@ -1,0 +1,129 @@
+<% var defaultBg = '#4d4d4d'; %>
+<div class="overlay" style="background: <%= theme.style && theme.style.header ? theme.style.header : defaultBg %>"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="<%=theme.root%>" class="profilepic">
+			<img src="<%=theme.avatar%>" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="<%=theme.root%>"><%=theme.author%></a></h1>
+		</hgroup>
+		<% if (theme.subtitle){ %>
+		<p class="header-subtitle"><%=theme.subtitle%></p>
+		<%}%>
+
+		<nav class="header-menu">
+			<ul>
+			<% for (var i in theme.menu){ %>
+				<li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
+	        <%}%>
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		<% for (var i in theme.smart_menu){ %>
+    			<% if(theme.smart_menu[i]){ %>
+                         <% if(i==='aboutme'){ %>
+                                   <a q-on="click: openSlider(e, '<%-i%>')" href="http:linbei.top"><%= theme.smart_menu[i] %></a>                                              <%} else{ %>
+             <a q-on="click: openSlider(e, '<%-i%>')" href="javascript:void(0)"><%= theme.smart_menu[i] %></a>
+                         <%}%>                       		
+               	<% } %>
+            <%}%>
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				<% for (var i in theme.subnav){ %>
+					<a class="<%= i %>" target="_blank" href="<%- url_for(theme.subnav[i]) %>" title="<%= i %>"><i class="icon-<%= i %>"></i></a>
+		        <%}%>
+			</div>
+		</nav>
+	</header>		
+</div>
+<% if(theme.aplayer.enable) { %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<div id="aplayer" style="position:absolute;left;0;bottom:0;"></div>
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/color-thief-don@2.0.2/src/color-thief.js"></script>
+<script>
+  const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    autoplay: false, //自动播放
+    listFolded: true, //播放列表默认折叠
+    listMaxHeight: 90, //播放列表最大高度
+    order: 'random', //音频循环顺序, 可选值: 'list', 'random'
+    loop: 'all', //音频循环播放, 可选值: 'all', 'one', 'none'
+    theme: '#e9e9e9', //切换音频时的主题色，优先级低于audio.theme
+    preload: 'none', //音频预加载，可选值: 'none', 'metadata', 'auto'
+    mutex: true, //互斥，阻止多个播放器同时播放，当前播放器播放时暂停其他播放器
+    lrcType: 3, //歌词格式，可选值：3（LRC文件歌词格式），1（JS字符串歌词格式）
+    volume: 0.7, //默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
+    fixed: true, //吸底模式（fixed:true），迷你模式（mini:true），普通模式（注释此行或者设置fixed:false）
+    audio: [{
+        name: '걱정말아요 그대',
+        artist: '野菊花',
+        lrc: '/music/lrc/걱정말아요 그대-野菊花.lrc',
+        cover: 'https://p2.music.126.net/zPpMOPCZVuYDlLnD25o_UA==/109951163658947777.jpg?param=300x300',
+        url: '/music/你不要担心我.mp3'
+      },
+      {
+        name: 'The Sound of Silence',
+        artist: 'Simon & Garfunkel',
+        lrc: '/music/lrc/The Sound of Silence-Simon & Garfunkel.lrc',
+        cover: 'https://p2.music.126.net/5QewaPSYQ7HgoC0zKDYHMA==/2534374302689297.jpg?param=300x300',
+        url: '/music/The Sound of Silence.mp3'
+      },
+     {
+        name: 'Angel',
+        artist: 'Sarah McLachlan',
+        lrc: '/music/lrc/Angel-Sarah McLachlan.lrc',
+        cover: 'https://p1.music.126.net/wYs84NA4oxhu2FFiXJQHXQ==/1809796139319333.jpg?param=300x300',
+        url: '/music/Angel.mp3'
+      },
+      {
+        name: 'Liekkas - Warm',
+        artist: 'Sofia Jannok',
+        lrc: '/music/lrc/Liekkas - Warm-Sofia Jannok.lrc',
+        cover: 'https://p1.music.126.net/uxMGSGXvzl8_Ur6s_Tx3Pw==/746568395269987.jpg?param=300x300',
+        url: '/music/liekkas.mp3'
+      },
+      {
+        name: 'What Are Words',
+        artist: 'Simon & Garfunkel',
+        lrc: '/music/lrc/What Are Words-Chris Medina.lrc',
+        cover: 'https://p1.music.126.net/pjXv_3WbDn1RpNvewmegDA==/823534209247481.jpg?param=300x300',
+        url: '/music/What Are Words.mp3'
+      },
+      {
+        name: '月光の雲海',
+        artist: '久石譲',
+        lrc: '/music/lrc/月光の雲海-久石譲.lrc',
+        cover: 'https://p2.music.126.net/GNKtRK8w7edPw3jAsavL2A==/5980243743832365.jpg?param=300x300',
+        url: '/music/天空之城.mp3'
+      },
+      {
+        name: 'Vincent',
+        artist: 'Don McLean',
+        lrc: '/music/lrc/Vincent-Don McLean.lrc',
+        cover: 'https://p1.music.126.net/GD3E4hvcJX3U8VeEFxYDmg==/905997581330533.jpg?param=300x300',
+        url: '/music/Vicent.mp3'
+      },
+
+
+    ]
+  });
+
+  //实现切换音频时，根据音频的封面图片自适应主题色
+  const colorThief = new ColorThief();
+  const setTheme = (index) => {
+    if (!ap.list.audios[index].theme) {
+      colorThief.getColorAsync(ap.list.audios[index].cover, function(color) {
+        ap.theme(`rgb(${color[0]}, ${color[1]}, ${color[2]})`, index);
+      });
+    }
+  };
+  setTheme(ap.list.index);
+  ap.on('listswitch', (data) => {
+    setTheme(data.index);
+  });
+</script>
+<% } %>
