@@ -107,7 +107,7 @@ deploy:
       - type: git
         repo:
           server: git@github.com:hanlinbei/hanlinbei.github.io.git 
-          #back-up: git@116.62.41.48:/home/git/blog.git
+          back-up: git@116.62.41.48:/home/git/blog.git
         branch: master
         messege:
       - type: baidu_url_submitter
